@@ -1,0 +1,144 @@
+installation:
+pip install Flask
+
+start:
+python chat_backend.py
+
+api:
+1. get_player_time	#獲得影片狀態
+
+response:
+{
+	'result': 'success', 
+	'time': player_time, 	#影片當前時間
+	'status': is_play	#是否在播放
+}
+
+ex:
+curl http://127.0.0.1:5000/get_player_time
+
+2. player_start	#播放
+
+response:
+{
+	'result': 'success', 
+}
+
+ex:
+curl http://127.0.0.1:5000/player_start
+
+3. player_stop	#停止
+
+response:
+{
+	'result': 'success', 
+}
+
+ex:
+curl http://127.0.0.1:5000/player_stop
+
+4. set_player_time	#設定影片時間
+
+request:
+{
+	'time': time,	#影片時間
+}
+
+response:
+{
+	'result': 'success', 
+}
+
+ex:
+curl -d "time=123" http://127.0.0.1:5000/set_player_time
+
+5. reset_emotion	#重置情緒統計
+
+response:
+{
+	'result': 'success', 
+}
+
+ex:
+curl http://127.0.0.1:5000/reset_emotion
+
+6. send_emotion
+
+request:
+{
+	'time': time,		#上傳時間
+	'content': content,	#情緒 (tooeasy, notunderstand)
+	'user': user,		#使用者名稱
+}
+
+response:
+{
+	'result': 'success', 
+}
+
+ex:
+curl -d "time=123&content=tooeasy&user=jerry" http://127.0.0.1:5000/send_emotion
+
+7. get_emotion
+
+response:
+{
+	'result': 'success', 
+	'emotion': [], 		#影片當前時間
+	'statistics': {		#統計
+		'statistics': 0,
+		'tooeasy': 0,
+	}
+}
+
+ex:
+curl http://127.0.0.1:5000/get_player_time
+
+8. send_chat
+
+request:
+{
+	'time': time,		#上傳時間
+	'content': content,	#訊息，若要標記老師必須包含 '@teacher'
+	'user': user,		#使用者名稱
+}
+
+response:
+{
+	'result': 'success', 
+}
+
+ex:
+curl -d "time=123&content=@teacher hahaha&user=jerry" http://127.0.0.1:5000/send_chat
+
+9. get_question
+
+response:
+{
+	'result': 'success', 	
+	'data': [					#問題列表
+		[question, time, user, solved, ans],	#問題內容 上傳時間 使用者名稱 是否解決 老師答覆
+	]		
+}
+
+ex:
+curl http://127.0.0.1:5000/get_question
+
+10. solve
+
+request:
+{
+	'time': time,		#上傳時間
+	'content': content,	#問題內容
+	'user': user,		#使用者名稱
+	'ans': ans,		#老師答覆
+}
+
+response:
+{
+	'result': 'success', 
+}
+
+ex:
+curl -d "time=123&content=@teacher hahaha&user=jerry&ans=this is answer" http://127.0.0.1:5000/solve
+

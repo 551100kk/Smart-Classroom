@@ -1,0 +1,29 @@
+@app.route("/get_player_time")
+curl http://127.0.0.1:5000/get_player_time
+
+@app.route("/player_start")
+curl http://127.0.0.1:5000/player_start
+
+@app.route("/player_stop")
+curl http://127.0.0.1:5000/player_stop
+
+@app.route("/set_player_time", methods=['POST'])
+curl -d "time=123" http://127.0.0.1:5000/set_player_time
+
+@app.route("/reset_emotion")
+curl http://127.0.0.1:5000/reset_emotion
+
+@app.route("/send_emotion", methods=['POST'])
+curl -d "time=123&content=tooeasy&user=jerry" http://127.0.0.1:5000/send_emotion
+
+@app.route("/get_emotion")
+curl http://127.0.0.1:5000/get_emotion
+
+@app.route("/send_chat", methods=['POST'])
+curl -d "time=123&content=@teacher hahaha&user=jerry" http://127.0.0.1:5000/send_chat
+
+@app.route("/get_question")
+curl http://127.0.0.1:5000/get_question
+
+@app.route("/solve", methods=['POST'])
+curl -d "time=123&content=@teacher hahaha&user=jerry&ans=this is answer" http://127.0.0.1:5000/solve
